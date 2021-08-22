@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  web:
+    image: sislabapi
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DB_PATH=/dist/brasil.db
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 256M

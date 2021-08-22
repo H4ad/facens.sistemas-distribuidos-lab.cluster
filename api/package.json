@@ -1,0 +1,31 @@
+{
+  "name": "@facens/cluster",
+  "version": "1.0.0",
+  "description": "Uma aplicação simples para retornar alguns dados de um banco SQLite",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "start:prod": "node dist/main.js",
+    "build": "webpack --config webpack.config.js",
+    "build:docker": "docker build --tag sislabapi .",
+    "deploy:stack": "docker stack deploy --compose-file docker-compose.yml sislabstack"
+  },
+  "author": "Vinícius Lourenço",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2",
+    "typeorm": "^0.2.37"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "esbuild-loader": "^2.8.0",
+    "http-server": "^13.0.0",
+    "ts-loader": "^9.2.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.3.5",
+    "webpack": "^5.20.2",
+    "webpack-cli": "^4.5.0"
+  }
+}

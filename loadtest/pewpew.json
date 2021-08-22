@@ -1,0 +1,34 @@
+{
+  "Count": 1000,
+  "Concurrency": 20,
+  "Quiet": true,
+  "Verbose": false,
+  "Compress": false,
+  "Timeout": "5.00s",
+  "DNSPrefetch": true,
+  "Headers": "Accept-Encoding: gzip",
+  "Targets": [
+    {
+      "URL": "http://localhost:8000/cities",
+      "Method": "GET",
+      "Compress": true
+    },
+    {
+      "URL": "http://localhost:8000/states",
+      "Method": "GET",
+      "Compress": true
+    },
+    {
+      "URL": "http://localhost:8000/cities/[0-9]{1,3}",
+      "Method": "GET",
+      "Compress": true,
+      "RegexURL": true
+    },
+    {
+      "URL": "http://localhost:8000/cities/[0-9]{1,3}",
+      "Method": "GET",
+      "Compress": true,
+      "RegexURL": true
+    }
+  ]
+}
