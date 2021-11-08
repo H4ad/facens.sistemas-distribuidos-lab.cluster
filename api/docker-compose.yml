@@ -1,21 +1,47 @@
 version: "3.9"
 
+# Aqui definimos quais serviços queremos executar e como irão ser executados.
 services:
+  # O nome do serviço
   web:
+    # A imagem desse serviço, ela foi criada numa
+    # etapa anterior e contém a nossa API.
     image: sislabapi
+    # Aqui, quais portas eu estarei deixando disponível
+    # para serem acessadas pela máquina host.
     ports:
+      # No caso, eu mapeio a porta 8000 do container e exponho ela também na porta 
+      # 8000 do host. Obs: O esquema é o seguinte: "host:container".
       - "8000:8000"
+    # Aqui, eu posso definir variáveis de ambiente desse sistema operacional, e com 
+    # isso, definir comportamentos customizados e passar variáveis de configuração 
+    # para a nossa API.
     environment:
       - PORT=8000
       - DB_PATH=/dist/brasil.db
     deploy:
+      # O número de Réplicas que irão ser criadas
       replicas: 2
+      # Gerencia as configurações de como deve ser feito uma atualização de uma imagem 
+      # docker em relação aos containers que estão rodando.
       update_config:
+        # Ao setar 2, diz que ele deve atualizar duas réplicas por vez, como isso é o 
+        # mesmo valor de réplicas ali em cima, todas serão atualizadas.
         parallelism: 2
+      
+      # Aqui, podemos configurar algumas configurações com relação a quanto recurso será 
+      # alocado para cada réplica que criarmos.
       resources:
+        # Você define os limites aqui.
         limits:
+          # O número de CPUs que deve ser alocado, ao colocar o valor como 0.25, eu garanto 
+          # que ao menos um quarto de CPU estará disponivel para o container poder usar.
           cpus: '0.25'
+          # A quantidade de memória alocada para esse container poder ser executado.
           memory: 256M
+        # Irá funcionar parecido com o limite, a diferença é que o limite ele deixa um espaço
+        # que pode ser menor ou maior que o limite. Já ao reservar, ele irá ocupar 256MB de 
+        # memória e 0.25 do CPU mesmo que o container não esteja usando tudo isso.
         reservations:
           cpus: '0.25'
           memory: 256M
